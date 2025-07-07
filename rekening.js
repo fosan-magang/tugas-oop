@@ -1,44 +1,30 @@
-/*
-class Rekening property saldo number & transaksi array of object (namaTransaksi, harga)
 
-method cetak saldo untuk cetak saldo akhir
+class Rekening {
+    constructor(saldo, transaksi) { //inisiliasasi properti bernama, saldo = 0 dan transaksi sbg array kosong
+        this.saldo = 0
+        this.transaksi = []
+    }
+    cetakSaldo() { 
+        return this.saldo
+    }
+    cetakTransaksi() {
+        return this.transaksi
+    }
+}
 
-method cetak transaksi untuk cetak seluruh transaksi
-
-class Aktifitas turuan dari Rekening
-
-method nabung - parameter jumlah 
-
-method belanja - parameter jumlah dibelanjakan & Nama Barang
-
-masing2 method nabung & belanja harus input ke transaksi
-
-INPUT:
-------
-    let dompet = new Aktifitas()
-
-    dompet.nabung(10000).cetakSaldo()
-
-    dompet.belanja(2000, 'ayam goreng').nabung(10000).cetakSaldo()
-
-    dompet.belanja(5000, 'sodakoh').cetakTransaksi()
-OUTPUT:
-------
-    10000
-    18000   
-[
-        {namaTransaksi: 'nabung', harga: 10000},
-
-        {namaTransaksi: 'ayam goreng', harga: 2000},
-
-        {namaTransaksi: 'nabung', harga: 10000},
-
-        {namaTransaksi: 'sodakoh', harga: 5000}
-    ]
-*/
-
-
-let dompet = new Aktifitas()
+class Aktifitas extends Rekening {
+    nabung(jumlah) { //jumlah sebagai parameter dari method nabung
+        this.saldo += jumlah //mengedit properti saldo, berdasarkan parameter jumlah
+        this.transaksi.push({namaTransaksi: 'nabung', harga: jumlah}) //kita memasukkan data ke dalam transaksi 
+        return this
+    }
+    belanja(jumlah, barang) {
+        this.saldo -= jumlah
+        this.transaksi.push({namaTransaksi: barang, harga: jumlah})
+        return this
+    }
+}
+let dompet = new Aktifitas() //membuat objek bernama dompet, dan diisi dengan class Aktifitas
 
 console.log(dompet.nabung(10000).cetakSaldo());
 console.log(dompet.belanja(2000,'ayam goreng').nabung(10000).cetakSaldo());
